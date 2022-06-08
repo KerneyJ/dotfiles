@@ -31,13 +31,7 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import hook
 
-class kTaskList(widget.TaskList):
-
-        def __init__(self):
-            super().__init__()
-
-        def get_taskname(self, window):
-            return ""
+from kwidgets import kTaskList
 
 @hook.subscribe.startup_once
 def autostart():
@@ -117,7 +111,7 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Columns(border_width=4),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -152,7 +146,7 @@ screens = [
             [
                 widget.CurrentLayout(),
                 widget.GroupBox(highlight_method="line"),
-                kTaskList(),
+                kTaskList(), # widget.TaskList(),
                 # widget.Prompt(), # must use lazy.spawncmd() for this
                 # widget.Backlight(), -> FIXME
                 # widget.BatteryIon(), -> FIXME
@@ -164,7 +158,7 @@ screens = [
                 widget.MemoryGraph(),
                 widget.PulseVolume(),
                 # widget.Chord(chords_colors={"launch": ("#ff0000", "#ffffff"),}, name_transform=lambda name: name.upper()),
-                widget.Systray(),
+                # widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.QuickExit(),
             ],
