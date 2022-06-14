@@ -124,7 +124,7 @@ layouts = [
     # layout.Bsp(),
     # layout.Matrix(),
     # layout.MonadTall(),
-    # layout.MonadWide(),
+    layout.MonadWide(border_width=0),
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
