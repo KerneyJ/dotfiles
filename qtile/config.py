@@ -175,6 +175,31 @@ screens = [
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
+    Screen(
+        top=bar.Bar(
+            [
+                widget.CurrentLayout(),
+                widget.GroupBox(highlight_method="line"),
+                kTaskList(),
+                widget.Battery(),
+                widget.CPU(),
+                widget.CPUGraph(),
+                widget.DF(),
+                widget.Memory(),
+                widget.MemoryGraph(),
+                widget.PulseVolume(),
+                widget.Systray(),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.QuickExit(),
+            ],
+            36,
+            opacity=0.5,
+            background="#000000"
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
+    ),
+
 ]
 
 # Drag floating layouts.
