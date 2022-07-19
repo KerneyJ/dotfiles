@@ -31,14 +31,6 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 from libqtile import hook
 
-class kTaskList(widget.TaskList):
-
-        def __init__(self):
-            super().__init__()
-
-        def get_taskname(self, window):
-            return ""
-
 @hook.subscribe.startup_once
 def autostart():
     os.system("~/.config/qtile/autostart.sh")
@@ -85,9 +77,11 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Spawn a command using a prompt widget"),
+    Key([mod], "Right", lazy.spawn("brightnessctl s +5%"), desc="Increase brightness"),
+    Key([mod], "Left", lazy.spawn("brightnessctl s 5%-"), desc="Decrease brightness"),
     # Key([mod, 'control'], 'l', lazy.spawn('gnome-screensaver-command -l')),
     # Key([mod, 'control'], 'q', lazy.spawn('gnome-session-quit --logout --no-prompt')),
-    # Key([mod, 'shift', 'control'], 'q', lazy.spawn('gnome-session-quit --power-off')),
+    Key([mod, 'shift', 'control'], 'q', lazy.spawn('gnome-session-quit --power-off')),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -117,8 +111,8 @@ for i in groups:
     )
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     layout.Max(),
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=0),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -133,65 +127,196 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="JetBrains Mono",
+    font="JetBrains Mono Nerd font",
     fontsize=16,
     padding=3,
     )
 extension_defaults = widget_defaults.copy()
 
-# strprsr -> string parser
-def strprsr(text):
-    for string in ["Firefox"]:
-        if string in text:
-            return string
-    return text
+colors = {
+    "dark purple": "#180136",
+    "purple": "#321d5b",
+    "light purple": "#5b398c",
+    "dark pink": "#b72990",
+    "pink": "#f986c9",
+    "trans": "00000000",
+}
+
+def get_widgets(primary=False):
+    widgets = [
+        widget.Spacer(length=30, background=colors["trans"],),
+        widget.TextBox(
+            text="\ue0b6",
+            padding=0,
+            fontsize=30,
+            foreground=colors["purple"],
+            background=colors["trans"],
+        ),
+        widget.TextBox(
+            text="異",
+            mouse_callbacks={"Button1": lazy.spawn("rofi -show run")},
+            background=colors["purple"],
+        ),
+        widget.Spacer(length=20, background=colors["purple"]),
+        widget.CurrentLayoutIcon(
+            padding=1,
+            scale=0.8,
+            background=colors["purple"],
+            custom_icon_paths=["~/.config/qtile/icons/"],
+        ),
+        widget.CurrentLayout(background=colors["purple"]),
+        widget.TextBox(
+            text="\ue0b4",
+            padding=0,
+            fontsize=30,
+            foreground=colors["purple"],
+            background=colors["trans"],
+        ),
+
+        widget.Spacer(length=10, background=colors["trans"]),
+        widget.TextBox(
+            text="\ue0b6",
+            padding=0,
+            fontsize=30,
+            foreground=colors["purple"],
+            background=colors["trans"],
+        ),
+        widget.GroupBox(
+            highlight_method="line",
+            background=colors["purple"],
+            highlight_color=[colors["light purple"], colors["light purple"]],
+            this_current_screen_border=colors["light purple"], 
+        ),
+        widget.TextBox(
+            text="\ue0b4",
+            padding=0,
+            fontsize=30,
+            foreground=colors["purple"],
+            background=colors["trans"],
+        ),
+
+        widget.Spacer(length=650, background=colors["trans"]),
+        # widget.WindowTabs(opacity=0.5),
+        widget.TextBox(
+            text="\ue0b6",
+            padding=0,
+            fontsize=30,
+            foreground=colors["light purple"],
+            background=colors["trans"],
+        ),
+        widget.CPU(
+            format=" {load_percent:04}%",
+            mouse_callbacks={"Button1": lazy.spawn("alacritty -e bpytop")},
+            background=colors["light purple"],
+        ),
+        widget.TextBox(
+            text="\ue0b4",
+            padding=0,
+            fontsize=30,
+            foreground=colors["light purple"],
+            background=colors["trans"],
+        ),
+
+        widget.Spacer(length=10, background=colors["trans"]),
+        widget.TextBox(
+            text="\ue0b6",
+            padding=0,
+            fontsize=30,
+            foreground=colors["dark purple"],
+            background=colors["trans"],
+        ),
+        widget.CapsNumLockIndicator(fmt=" {}", background=colors["dark purple"]),
+        widget.TextBox(
+            text="\ue0b4",
+            padding=0,
+            fontsize=30,
+            foreground=colors["dark purple"],
+            background=colors["trans"],
+        ),
+
+        widget.Spacer(length=10, background=colors["trans"]),
+        widget.TextBox(
+            text="\ue0b6",
+            padding=0,
+            fontsize=30,
+            foreground=colors["dark purple"],
+            background=colors["trans"],
+        ),
+        widget.Clock(format=" %a %d %b %Y, %I:%M %p", background=colors["dark purple"]),
+        widget.TextBox(
+            text="\ue0b4",
+            padding=0,
+            fontsize=30,
+            foreground=colors["dark purple"],
+            background=colors["trans"],
+        ),
+
+        widget.Spacer(length=10, background=colors["trans"]),
+        widget.TextBox(
+            text="\ue0b6",
+            padding=0,
+            fontsize=30,
+            foreground=colors["dark purple"],
+            background=colors["trans"],
+        ), 
+        widget.Battery(
+            format="{char} {percent:2.0%}",
+            charge_char="",
+            discharge_char="",
+            full_char="",
+            unknown_char="",
+            empty_char="",
+            show_short_text=False,
+            background=colors["dark purple"],
+        ),
+        widget.TextBox(
+            text="﫼",
+            mouse_callbacks={
+                "Button1": lazy.spawn("dm-tool lock"),
+                "Button3": lazy.shutdown(),
+            },
+            background=colors["dark purple"],
+        ),
+        widget.Spacer(length=10, background=colors["dark purple"]),
+        widget.TextBox(
+            text="",
+            mouse_callbacks={
+                "Button1": lazy.spawn("systemctl suspend"),
+                "Button2": lazy.spawn("systemctl restart"),
+                "Button3": lazy.spawn("systemctl poweroff"),
+            },
+            background=colors["dark purple"],
+        ),
+
+        widget.TextBox(
+            text="\ue0b4",
+            padding=0,
+            fontsize=30,
+            foreground=colors["dark purple"],
+            background=colors["trans"],
+        ),
+
+        widget.Spacer(length=3, background=colors["trans"]),
+    ]
+    if primary:
+        widgets.insert(10, widget.Systray())
+    return widgets
+
 
 screens = [
     Screen(
         top=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(highlight_method="line"),
-                kTaskList(),
-                # widget.Prompt(), # must use lazy.spawncmd() for this
-                # widget.Backlight(), -> FIXME
-                # widget.BatteryIon(), -> FIXME
-                widget.Battery(),
-                widget.CPU(),
-                widget.CPUGraph(),
-                widget.DF(),
-                widget.Memory(),
-                widget.MemoryGraph(),
-                widget.PulseVolume(),
-                # widget.Chord(chords_colors={"launch": ("#ff0000", "#ffffff"),}, name_transform=lambda name: name.upper()),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-            ],
+            get_widgets(primary=True),
             36,
-            opacity=0.5,
-            background="#000000"
+            # opacity=0.5,
+            background="#00000000",
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
     Screen(
         top=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(highlight_method="line"),
-                kTaskList(),
-                widget.Battery(),
-                widget.CPU(),
-                widget.CPUGraph(),
-                widget.DF(),
-                widget.Memory(),
-                widget.MemoryGraph(),
-                widget.PulseVolume(),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-            ],
+            get_widgets(primary=False),
             36,
             opacity=0.5,
             background="#000000"
@@ -199,7 +324,6 @@ screens = [
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
     ),
-
 ]
 
 # Drag floating layouts.
