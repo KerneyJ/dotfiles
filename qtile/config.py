@@ -79,9 +79,9 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="Spawn a command using a prompt widget"),
     Key([mod], "Right", lazy.spawn("brightnessctl s +5%"), desc="Increase brightness"),
     Key([mod], "Left", lazy.spawn("brightnessctl s 5%-"), desc="Decrease brightness"),
-    # Key([mod, 'control'], 'l', lazy.spawn('gnome-screensaver-command -l')),
+    Key([mod, 'control'], 'l', lazy.spawn('dm-tool lock')),
     # Key([mod, 'control'], 'q', lazy.spawn('gnome-session-quit --logout --no-prompt')),
-    Key([mod, 'shift', 'control'], 'q', lazy.spawn('gnome-session-quit --power-off')),
+    Key([mod, 'shift', 'control'], 'q', lazy.spawn("systemctl poweroff")),
 ]
 
 groups = [Group(i) for i in "123456789"]
@@ -137,6 +137,7 @@ colors = {
     "dark purple": "#180136",
     "purple": "#321d5b",
     "light purple": "#5b398c",
+    "light purple trans": "#5b398c88",
     "dark pink": "#b72990",
     "pink": "#f986c9",
     "trans": "00000000",
@@ -184,8 +185,8 @@ def get_widgets(primary=False):
         widget.GroupBox(
             highlight_method="line",
             background=colors["purple"],
-            highlight_color=[colors["light purple"], colors["light purple"]],
-            this_current_screen_border=colors["light purple"], 
+            highlight_color=[colors["light purple trans"], colors["light purple trans"]],
+            this_current_screen_border=colors["light purple trans"], 
         ),
         widget.TextBox(
             text="\ue0b4",
@@ -195,25 +196,28 @@ def get_widgets(primary=False):
             background=colors["trans"],
         ),
 
-        widget.Spacer(length=650, background=colors["trans"]),
-        # widget.WindowTabs(opacity=0.5),
+        # widget.Spacer(length=650, background=colors["trans"]),
+        widget.WindowTabs(
+            background=colors["trans"],
+            foreground=colors["trans"],
+        ),
         widget.TextBox(
             text="\ue0b6",
             padding=0,
             fontsize=30,
-            foreground=colors["light purple"],
+            foreground=colors["purple"],
             background=colors["trans"],
         ),
         widget.CPU(
             format=" {load_percent:04}%",
             mouse_callbacks={"Button1": lazy.spawn("alacritty -e bpytop")},
-            background=colors["light purple"],
+            background=colors["purple"],
         ),
         widget.TextBox(
             text="\ue0b4",
             padding=0,
             fontsize=30,
-            foreground=colors["light purple"],
+            foreground=colors["purple"],
             background=colors["trans"],
         ),
 
@@ -222,15 +226,15 @@ def get_widgets(primary=False):
             text="\ue0b6",
             padding=0,
             fontsize=30,
-            foreground=colors["dark purple"],
+            foreground=colors["purple"],
             background=colors["trans"],
         ),
-        widget.CapsNumLockIndicator(fmt=" {}", background=colors["dark purple"]),
+        widget.CapsNumLockIndicator(fmt=" {}", background=colors["purple"]),
         widget.TextBox(
             text="\ue0b4",
             padding=0,
             fontsize=30,
-            foreground=colors["dark purple"],
+            foreground=colors["purple"],
             background=colors["trans"],
         ),
 
@@ -239,15 +243,15 @@ def get_widgets(primary=False):
             text="\ue0b6",
             padding=0,
             fontsize=30,
-            foreground=colors["dark purple"],
+            foreground=colors["purple"],
             background=colors["trans"],
         ),
-        widget.Clock(format=" %a %d %b %Y, %I:%M %p", background=colors["dark purple"]),
+        widget.Clock(format=" %a %d %b %Y, %I:%M %p", background=colors["purple"]),
         widget.TextBox(
             text="\ue0b4",
             padding=0,
             fontsize=30,
-            foreground=colors["dark purple"],
+            foreground=colors["purple"],
             background=colors["trans"],
         ),
 
@@ -256,7 +260,7 @@ def get_widgets(primary=False):
             text="\ue0b6",
             padding=0,
             fontsize=30,
-            foreground=colors["dark purple"],
+            foreground=colors["purple"],
             background=colors["trans"],
         ), 
         widget.Battery(
@@ -267,7 +271,7 @@ def get_widgets(primary=False):
             unknown_char="",
             empty_char="",
             show_short_text=False,
-            background=colors["dark purple"],
+            background=colors["purple"],
         ),
         widget.TextBox(
             text="﫼",
@@ -275,9 +279,9 @@ def get_widgets(primary=False):
                 "Button1": lazy.spawn("dm-tool lock"),
                 "Button3": lazy.shutdown(),
             },
-            background=colors["dark purple"],
+            background=colors["purple"],
         ),
-        widget.Spacer(length=10, background=colors["dark purple"]),
+        widget.Spacer(length=10, background=colors["purple"]),
         widget.TextBox(
             text="",
             mouse_callbacks={
@@ -285,21 +289,21 @@ def get_widgets(primary=False):
                 "Button2": lazy.spawn("systemctl restart"),
                 "Button3": lazy.spawn("systemctl poweroff"),
             },
-            background=colors["dark purple"],
+            background=colors["purple"],
         ),
 
         widget.TextBox(
             text="\ue0b4",
             padding=0,
             fontsize=30,
-            foreground=colors["dark purple"],
+            foreground=colors["purple"],
             background=colors["trans"],
         ),
 
         widget.Spacer(length=3, background=colors["trans"]),
     ]
     if primary:
-        widgets.insert(10, widget.Systray())
+        widgets.insert(10, widget.Systray(background=colors["purple"]))
     return widgets
 
 
