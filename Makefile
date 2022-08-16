@@ -11,3 +11,8 @@ qtile:
 picom:
 	cp -r ~/.config/picom ~/backup
 	cp -r picom ~/.config
+
+.PHONY: rofi
+rofi:
+	cp -r ~/.config/rofi ~/backup
+	cp -r rofi ~/.config
