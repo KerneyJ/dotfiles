@@ -84,6 +84,19 @@ keys = [
     Key([mod, 'shift', 'control'], 'q', lazy.spawn("systemctl poweroff")),
 ]
 
+KP = {
+    "1": "End",
+    "2": "Down",
+    "3": "Next",
+    "4": "Left",
+    "5": "Begin",
+    "6": "Right",
+    "7": "Home",
+    "8": "Up",
+    "9": "Prior",
+    "0": "Insert",
+}
+
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
@@ -92,7 +105,7 @@ for i in groups:
             # mod1 + letter of group = switch to group
             Key(
                 [mod],
-                i.name,
+                "KP_" + KP[i.name[0]],
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
@@ -143,7 +156,7 @@ colors = {
     "trans": "00000000",
 }
 
-def get_widgets(primary=False):
+def get_top_widgets(primary=False):
     widgets = [
         widget.Spacer(length=30, background=colors["trans"],),
         widget.TextBox(
@@ -300,27 +313,53 @@ def get_widgets(primary=False):
             background=colors["trans"],
         ),
 
-        widget.Spacer(length=3, background=colors["trans"]),
+        widget.Spacer(length=10, background=colors["trans"]),
     ]
     if primary:
         widgets.insert(10, widget.Systray(background=colors["purple"]))
     return widgets
 
+def get_bot_widgets():
+    widgets = [
+        widget.TextBox(
+            text="\ue0b6",
+            padding=0,
+            fontsize=30,
+            foreground=colors["purple"],
+            background=colors["trans"],
+        ),
+        widget.TaskList(
+            background=colors["purple"],
+            parse_text=lambda x: "",
+            borderwidth=0,
+        ),
+        widget.TextBox(
+            text="\ue0b4",
+            padding=0,
+            fontsize=30,
+            foreground=colors["purple"],
+            background=colors["trans"],
+        ),
+    ]
+    return widgets
 
 screens = [
     Screen(
         top=bar.Bar(
-            get_widgets(primary=True),
+            get_top_widgets(primary=True),
             36,
             # opacity=0.5,
             background="#00000000",
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
+        #bottom=bar.Bar(
+        #    get_bot_widgets(),
+        #    36,
+        #    background="#00000000",
+        #)
     ),
     Screen(
         top=bar.Bar(
-            get_widgets(primary=False),
+            get_top_widgets(primary=False),
             36,
             opacity=0.5,
             background="#000000"
