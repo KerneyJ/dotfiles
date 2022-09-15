@@ -35,6 +35,9 @@ from libqtile import hook
 def autostart():
     os.system("~/.config/qtile/autostart.sh")
 
+def parse_text(text):
+    return "|".join(["⚫" for _ in range(len(text.split("|")))])
+
 mod = "mod4"
 terminal = "alacritty"
 
@@ -171,6 +174,7 @@ def get_top_widgets(primary=False):
             mouse_callbacks={"Button1": lazy.spawn("rofi -show run")},
             background=colors["purple"],
         ),
+
         widget.Spacer(length=20, background=colors["purple"]),
         widget.CurrentLayoutIcon(
             padding=1,
@@ -211,6 +215,7 @@ def get_top_widgets(primary=False):
 
         # widget.Spacer(length=650, background=colors["trans"]),
         widget.WindowTabs(
+            #parse_text=parse_text,
             background=colors["trans"],
             foreground=colors["trans"],
         ),
