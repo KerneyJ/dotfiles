@@ -16,3 +16,8 @@ picom:
 rofi:
 	cp -r ~/.config/rofi ~/backup
 	cp -r rofi ~/.config
+
+.PHONY: alacritty
+alacritty:
+	cp -r ~/.config/rofi ~/backup
+	cp -r alacritty ~/.config  

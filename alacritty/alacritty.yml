@@ -176,7 +176,7 @@ font:
   #
   # Thin strokes are suitable for retina displays, but for non-retina screens
   # it is recommended to set `use_thin_strokes` to `false`.
-  use_thin_strokes: true
+  # use_thin_strokes: true
 
   # Use built-in font for box drawing characters.
   #
@@ -237,7 +237,7 @@ colors:
       foreground: '#ffffff'
       background: '#000000'
 
-    bar:
+    colors.footer_bar:
       background: '#c5c8c6'
       foreground: '#1d1f21'
 
