@@ -1,0 +1,144 @@
+[bell]
+animation = "EaseOutExpo"
+color = "#ffffff"
+duration = 0
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.bright]
+black = "#666666"
+blue = "#7aa6da"
+cyan = "#70c0b1"
+green = "#b9ca4a"
+magenta = "#c397d8"
+red = "#d54e53"
+white = "#eaeaea"
+yellow = "#e7c547"
+
+[colors.cursor]
+cursor = "CellForeground"
+text = "CellBackground"
+
+[colors.normal]
+black = "#1d1f21"
+blue = "#81a2be"
+cyan = "#8abeb7"
+green = "#b5bd68"
+magenta = "#b294bb"
+red = "#cc6666"
+white = "#c5c8c6"
+yellow = "#f0c674"
+
+[colors.primary]
+background = "#1d1f21"
+foreground = "#c5c8c6"
+
+#[colors.search."colors.footer_bar"]
+[colors.footer_bar]
+background = "#c5c8c6"
+foreground = "#1d1f21"
+
+[colors.search.focused_match]
+background = "#000000"
+foreground = "#ffffff"
+
+[colors.search.matches]
+background = "#ffffff"
+foreground = "#000000"
+
+[font]
+size = 16.0
+
+[font.bold]
+family = "JetBrains Mono"
+style = "ExtraBold"
+
+[font.bold_italic]
+family = "JetBrains Mono"
+style = "SemiBold Italic"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "JetBrains Mono"
+style = "Italic"
+
+[font.normal]
+family = "JetBrains Mono"
+style = "Medium"
+
+[font.offset]
+x = 0
+y = 0
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "Paste"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "Copy"
+
+[[keyboard.bindings]]
+action = "ClearLogNotice"
+key = "L"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\f"
+key = "L"
+mode = "~Vi|~Search"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToTop"
+key = "Home"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mode = "~Alt"
+mods = "Shift"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[terminal.shell]
+args = ["--login"]
+program = "/bin/zsh"
+
+[window]
+decorations = "none"
+dynamic_padding = false
+dynamic_title = false
+opacity = 0.0
+startup_mode = "Windowed"
+title = "Alacritty"
+
+[window.dimensions]
+columns = 0
+lines = 0
+
+[window.padding]
+x = 0
+y = 0
+
+[terminal]
