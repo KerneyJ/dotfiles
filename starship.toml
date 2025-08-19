@@ -3,10 +3,10 @@
 add_newline = true
 
 format = """
-[░▒▓](green)\
+[░▒▓](blue)\
 $os\
 $username\
-[ ](green)\
+[ ](blue)\
 $directory\
 $character\
 """
@@ -14,12 +14,12 @@ right_format = """$git_branch $git_status $git_commit $all $cmd_duration"""
 
 [username]
 show_always = true
-format = '[$user ](bg:green)'
+format = '[$user ](bg:blue)'
 disabled = false
 
 [os]
 disabled = false
-style = 'bg:green'
+style = 'bg:blue'
 
 [os.symbols]
 Arch = "  "
@@ -46,6 +46,15 @@ disabled = false
 "Downloads" = " "
 "Music" = "󰝚 "
 "Pictures" = " "
+
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true
+
+[azure]
+disabled = true
 
 [git_branch]
 symbol = "  "

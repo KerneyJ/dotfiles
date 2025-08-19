@@ -105,3 +105,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export STARSHIP_CONFIG="$HOME/.config/starship.toml"
