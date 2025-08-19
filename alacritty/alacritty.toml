@@ -141,4 +141,22 @@ lines = 0
 x = 0
 y = 0
 
+[cursor]
+# Enable/disable smooth cursor animations
+smooth_motion = true
+
+# Animation speed: 0.0 = not moving, 1.0 = moves instantly
+smooth_motion_factor = 0.9
+
+# Spring effect: 0.0 = broken, 1.0 = cursor shape unaffected by movement
+smooth_motion_spring = 0.5
+
+# Limits how much the cursor size may change during animation
+smooth_motion_max_stretch_x = 3.0
+smooth_motion_max_stretch_y = 3.0
+
+# Override cursor shape for better animation appearance
+# Options: "block", "underline", "beam"
+block_replace_shape = "block"
+
 [terminal]
