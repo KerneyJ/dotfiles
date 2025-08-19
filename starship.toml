@@ -9,8 +9,9 @@ $username\
 [ ](blue)\
 $directory\
 $character\
+$git_branch\
 """
-right_format = """$git_branch $git_status $git_commit $all $cmd_duration"""
+right_format = """$git_status $git_commit $all $cmd_duration"""
 
 [username]
 show_always = true
@@ -61,13 +62,12 @@ symbol = "  "
 format = '[$symbol $branch (:$remote_branch)]($style)'
 
 [git_status]
-style = "bold blue"
-format = "[$modified$deleted$untracked$ahead_behind]($style) "
+format = "[$modified$deleted$untracked](bold red)[$ahead_behind](bold yellow) "
 modified = " "
 deleted = " "
 untracked = " "
-ahead = " "
-behind = " "
+ahead = " ${count}"
+behind = " ${count}"
 up_to_date = " "
 
 [git_commit]

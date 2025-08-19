@@ -146,7 +146,7 @@ y = 0
 smooth_motion = true
 
 # Animation speed: 0.0 = not moving, 1.0 = moves instantly
-smooth_motion_factor = 0.9
+smooth_motion_factor = 0.7
 
 # Spring effect: 0.0 = broken, 1.0 = cursor shape unaffected by movement
 smooth_motion_spring = 0.5
