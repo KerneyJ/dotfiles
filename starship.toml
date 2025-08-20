@@ -68,7 +68,6 @@ deleted = " "
 untracked = " "
 ahead = " ${count}"
 behind = " ${count}"
-up_to_date = " "
 
 [git_commit]
 tag_symbol = '  '
