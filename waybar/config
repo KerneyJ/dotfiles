@@ -1,7 +1,7 @@
 {
 	"layer": "top",
 	"modules-left": ["custom/launcher","cpu","memory","custom/media","tray"],
-	"modules-center": ["river/tags"],
+    "modules-center": ["hyprland/workspaces"],
 	"modules-right": ["custom/updates","custom/wallpaper","backlight","pulseaudio","clock", "battery","custom/power"],
 	
 	"pulseaudio": {
@@ -15,9 +15,6 @@
 		}
 	},
 
-    "river/tags": {
-		"num-tags": 6
-    },
 	"network": {
 		"tooltip": false,
 		"format-wifi": "  {essid}",
@@ -49,9 +46,6 @@
     "clock": {
         "format": "{:%H:%M %p}"
     },
-    //"clock": {
-    //    "format": "{: %I:%M %p   %m/%d/%Y}"
-    //},
     "cpu": {
         "interval": 15,
         "format": " {}%",
@@ -74,6 +68,17 @@
         "escape": true,
         "exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
         "on-click": "playerctl play-pause"
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": "",
+            "empty": ""
+        },
+        "persistent-workspaces": {
+            "*": [ 1,2,3,4,5 ]
+        }
     },
     "custom/launcher":{
         "format": " ",
