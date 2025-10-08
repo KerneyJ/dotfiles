@@ -135,13 +135,11 @@ local plugins = {
                 ensure_installed = { "rust_analyzer" },
             })
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local lspconfig = require("lspconfig")
-            lspconfig.rust_analyzer.setup({
+            vim.lsp.config('rust_analyzer', {
                 capabilities = capabilities,
                 settings = {
                     ["rust-analyzer"] = {
-                        -- cargo = { allFeatures = true },
-                        check = { command = "clippy" },
+                        check = { command = "clippy" }
                     },
                 },
             })
