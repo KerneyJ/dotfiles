@@ -32,6 +32,10 @@ local plugins = {
         opts = { ensure_installed = { "cpp" } },
     },
     {
+        "pest-parser/pest.vim",
+        ft = { "pest" },
+    },
+    {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
@@ -132,7 +136,7 @@ local plugins = {
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = { "rust_analyzer" },
+                ensure_installed = { "rust_analyzer", "pest_ls" },
             })
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             vim.lsp.config('rust_analyzer', {
@@ -142,6 +146,9 @@ local plugins = {
                         check = { command = "clippy" }
                     },
                 },
+            })
+            vim.lsp.config('pest_ls', {
+                capabilities = capabilities,
             })
         end,
     },
