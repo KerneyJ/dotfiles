@@ -36,6 +36,13 @@ local plugins = {
         ft = { "pest" },
     },
     {
+        "Julian/lean.nvim",
+        ft = { "lean" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+    },
+    {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
