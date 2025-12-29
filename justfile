@@ -13,7 +13,6 @@ install:
     cp -r nvim ~/.config/
     cp -r waybar ~/.config/
     cp -r wofi ~/.config/
-    cp starship.toml ~/.config/
     cp .zshrc ~/
     @echo "Installation complete!"
 
@@ -28,7 +27,6 @@ backup:
         [ -d "$HOME/.config/$dir" ] && cp -r "$HOME/.config/$dir" "$BACKUP_DIR/"
     done
 
-    [ -f "$HOME/.config/starship.toml" ] && cp "$HOME/.config/starship.toml" "$BACKUP_DIR/"
     [ -f "$HOME/.zshrc" ] && cp "$HOME/.zshrc" "$BACKUP_DIR/"
 
     echo "Backup complete at $BACKUP_DIR"
@@ -45,7 +43,6 @@ clean:
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         rm -rf ~/.config/{alacritty,bpytop,htop,hypr,nvim,waybar,wofi}
-        rm -f ~/.config/starship.toml
         echo "Clean complete!"
     else
         echo "Aborted."

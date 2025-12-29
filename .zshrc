@@ -88,8 +88,6 @@ else
    export EDITOR='nvim'
 fi
 
-eval "$(starship init zsh)"
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -104,5 +102,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-export STARSHIP_CONFIG="$HOME/.config/starship.toml"
