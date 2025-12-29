@@ -40,7 +40,15 @@ local plugins = {
         ft = { "lean" },
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
         },
+        opts = {
+            mappings = true,
+        },
+        config = function(_, opts)
+            local lean = require('lean')
+            lean.setup(opts)
+        end,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -156,6 +164,27 @@ local plugins = {
             })
             vim.lsp.config('pest_ls', {
                 capabilities = capabilities,
+            })
+            vim.lsp.config('leanls', {
+                capabilities = capabilities,
+                on_attach = function(client, bufnr)
+                    -- Lean Key mappings
+                    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+                    -- gD: Jump to declaration (where symbol is first declared)
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+                    -- gd: Jump to definition (actual implementation)
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+                    -- K: Show hover documentation/type information
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+                    -- gi: Jump to implementation
+                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+                    -- Ctrl+k: Show function signature help
+                    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+                    -- \ca: Show code actions (tactics, quick fixes)
+                    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+                    -- gr: Show all references to symbol under cursor
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+                end,
             })
         end,
     },
