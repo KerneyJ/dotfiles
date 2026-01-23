@@ -151,7 +151,7 @@ local plugins = {
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = { "rust_analyzer", "pest_ls" },
+                ensure_installed = { "rust_analyzer", "pest_ls", "pyright" },
             })
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             vim.lsp.config('rust_analyzer', {
@@ -164,6 +164,18 @@ local plugins = {
             })
             vim.lsp.config('pest_ls', {
                 capabilities = capabilities,
+            })
+            vim.lsp.config('pyright', {
+                capabilities = capabilities,
+                settings = {
+                    python = {
+                        analysis = {
+                            autoSearchPaths = true,
+                            diagnosticMode = "workspace",
+                            useLibraryCodeForTypes = true,
+                        },
+                    },
+                },
             })
             vim.lsp.config('leanls', {
                 capabilities = capabilities,
@@ -203,7 +215,7 @@ vim.keymap.set("n", "<C-y>", ":TransparentToggle<CR>")
 
 local configs = require("nvim-treesitter.configs")
 configs.setup({
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "rust" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "rust", "python" },
     sync_install = false,
     highlight = { enable = true },
     indent = { enable = true },
