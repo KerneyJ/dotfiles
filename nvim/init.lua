@@ -127,6 +127,7 @@ local plugins = {
                 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
                 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
                 vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+                vim.keymap.set('n', 'gb', '<C-o>', bufopts)
             end
             return metals_config
         end,
@@ -177,6 +178,7 @@ local plugins = {
                     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
                     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
                     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+                    vim.keymap.set('n', 'gb', '<C-o>', bufopts)
                 end,
                 settings = {
                     python = {
@@ -207,6 +209,8 @@ local plugins = {
                     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
                     -- gr: Show all references to symbol under cursor
                     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+                    -- gb: Go back to previous location in jump list
+                    vim.keymap.set('n', 'gb', '<C-o>', bufopts)
                 end,
             })
         end,
