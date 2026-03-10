@@ -152,7 +152,7 @@ local plugins = {
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = { "rust_analyzer", "pest_ls", "pyright" },
+                ensure_installed = { "rust_analyzer", "pest_ls", "pyright", "ts_ls" },
             })
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             vim.lsp.config('rust_analyzer', {
@@ -225,6 +225,21 @@ local plugins = {
                     vim.keymap.set('n', 'gb', '<C-o>', bufopts)
                 end,
             })
+            vim.lsp.config('ts_ls', {
+                capabilities = capabilities,
+                on_attach = function(client, bufnr)
+                    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+                    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+                    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+                    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+                    vim.keymap.set('n', 'gb', '<C-o>', bufopts)
+                end,
+            })
         end,
     },
 }
@@ -242,7 +257,7 @@ vim.keymap.set("n", "<C-y>", ":TransparentToggle<CR>")
 
 local configs = require("nvim-treesitter.configs")
 configs.setup({
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html", "rust", "python" },
+    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "typescript", "html", "rust", "python" },
     sync_install = false,
     highlight = { enable = true },
     indent = { enable = true },
