@@ -35,6 +35,24 @@ backup:
 # Backup and install in one step
 update: backup install
 
+# Restore from most recent backup
+restore:
+    #!/usr/bin/env bash
+    LATEST=$(ls -dt "$HOME"/.config_backup_* 2>/dev/null | head -1)
+    if [ -z "$LATEST" ]; then
+        echo "No backups found!"
+        exit 1
+    fi
+    echo "Restoring from $LATEST..."
+
+    for dir in alacritty bpytop htop hypr nvim waybar wofi; do
+        [ -d "$LATEST/$dir" ] && cp -r "$LATEST/$dir" "$HOME/.config/"
+    done
+
+    [ -f "$LATEST/.zshrc" ] && cp "$LATEST/.zshrc" "$HOME/"
+
+    echo "Restore complete!"
+
 # Remove installed configs (use with caution)
 clean:
     #!/usr/bin/env bash
