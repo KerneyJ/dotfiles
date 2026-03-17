@@ -36,6 +36,15 @@ local plugins = {
         ft = { "pest" },
     },
     {
+        "lervag/vimtex",
+        ft = { "tex" },
+        config = function()
+            vim.g.vimtex_view_method = "general"
+            vim.g.vimtex_view_general_viewer = "firefox"
+            vim.g.vimtex_compiler_method = "latexmk"  -- requires: pacman -S texlive-binextra
+        end,
+    },
+    {
         "Julian/lean.nvim",
         ft = { "lean" },
         dependencies = {
@@ -152,7 +161,7 @@ local plugins = {
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = { "rust_analyzer", "pest_ls", "pyright", "ts_ls" },
+                ensure_installed = { "rust_analyzer", "pest_ls", "pyright", "ts_ls", "texlab" },
             })
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
             vim.lsp.config('rust_analyzer', {
@@ -239,6 +248,24 @@ local plugins = {
                     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
                     vim.keymap.set('n', 'gb', '<C-o>', bufopts)
                 end,
+            })
+            vim.lsp.config('texlab', {
+                capabilities = capabilities,
+                on_attach = function(client, bufnr)
+                    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+                    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+                    vim.keymap.set('n', 'gb', '<C-o>', bufopts)
+                end,
+                settings = {
+                    texlab = {
+                        build = {
+                            onSave = true,  -- auto-compile on save, keeps diagnostics in sync
+                        },
+                    },
+                },
             })
         end,
     },
