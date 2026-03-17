@@ -42,6 +42,7 @@ local plugins = {
             vim.g.vimtex_view_method = "general"
             vim.g.vimtex_view_general_viewer = "firefox"
             vim.g.vimtex_compiler_method = "latexmk"  -- requires: pacman -S texlive-binextra
+            vim.g.vimtex_quickfix_open_on_warning = 0  -- don't open quickfix for warnings, only errors
         end,
     },
     {
