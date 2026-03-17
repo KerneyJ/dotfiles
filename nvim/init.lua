@@ -69,6 +69,10 @@ local plugins = {
         config = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
+
+            -- Clean image URLs from LSP completion docs (fixes texlab)
+            require("lsp_helpers").setup_clean_documentation()
+
             cmp.setup({
                   snippet = {
                     expand = function(args)
